@@ -1,17 +1,6 @@
 import React from 'react';
 import { Project, UserRole } from '../types';
-import {
-  Star,
-  Video,
-  Cpu,
-  ShieldCheck,
-  ArrowUpRight,
-  Sparkles,
-  Layers,
-  Send,
-  CheckCircle2,
-  TrendingUp
-} from 'lucide-react';
+import { Star, Video, Cpu, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -27,194 +16,146 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onContact,
 }) => {
   const categoryLabels: Record<string, string> = {
-    healthcare: 'Healthcare & Biotech',
-    education: 'Education Tech',
-    agriculture: 'AgriTech & Climate',
-    environment: 'CleanTech & Water',
-    technology: 'DeepTech & Robotics',
+    healthcare: 'Healthcare',
+    education: 'Education',
+    agriculture: 'Agriculture',
+    environment: 'Environment',
+    technology: 'Technology',
   };
-
-  const stageBadgeColors: Record<string, string> = {
-    'Field Tested': 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40',
-    'Working Prototype': 'bg-teal-500/15 text-teal-300 border-teal-500/40',
-    'MVP': 'bg-cyan-500/15 text-cyan-300 border-cyan-500/40',
-    'Concept': 'bg-amber-500/15 text-amber-300 border-amber-500/40',
-  };
-
-  // Progress towards simulated funding
-  const fundingPercent = Math.min(Math.round((project.estimatedCost / project.targetFunding) * 100 * 4), 92);
 
   return (
-    <div className="group relative flex flex-col justify-between bg-[#0D1321]/80 hover:bg-[#11192b]/95 backdrop-blur-xl border border-slate-800/80 hover:border-emerald-500/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[0_12px_35px_-8px_rgba(16,185,129,0.2)] hover:-translate-y-1">
-      
-      {/* Top Image / Media Zone */}
+    <div className="bg-white rounded-xl border border-slate-200/90 hover:border-teal-500/60 transition-all duration-200 shadow-xs hover:shadow-md flex flex-col justify-between overflow-hidden group">
       <div>
-        <div className="relative h-48 w-full bg-slate-950 overflow-hidden">
+        {/* Project Thumbnail Image with Safe Fallback */}
+        <div className="relative h-48 w-full bg-slate-900 overflow-hidden">
           {project.imageUrl ? (
             <img
               src={project.imageUrl}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103"
               referrerPolicy="no-referrer"
               onError={(e) => {
                 (e.target as HTMLElement).style.display = 'none';
               }}
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-[#0B101E] to-teal-950/40 flex items-center justify-center p-6 text-center">
-              <Cpu className="w-12 h-12 text-emerald-400/60 mb-2" />
+            <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 flex items-center justify-center p-6 text-center">
+              <Cpu className="w-10 h-10 text-teal-400/80 mb-2" />
+              <div className="text-xs font-semibold text-teal-300 uppercase tracking-wider">
+                {categoryLabels[project.category] || project.category}
+              </div>
             </div>
           )}
 
-          {/* Dark luxury gradient scrim */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1321] via-transparent to-black/60 pointer-events-none" />
-
-          {/* Top Badges Bar */}
-          <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 z-10">
-            <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono uppercase tracking-wider font-bold bg-[#070A12]/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
-              {categoryLabels[project.category] || project.category}
-            </span>
-
-            {project.videoUrl && (
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-[10px] font-semibold bg-slate-950/80 backdrop-blur-md text-white border border-slate-700/60 shadow-sm">
-                <Video className="w-3 h-3 text-emerald-400" />
-                <span>Demo Video</span>
-              </div>
-            )}
-          </div>
+          {/* Video indicator badge */}
+          {project.videoUrl && (
+            <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-xs text-white text-[11px] font-medium px-2 py-1 rounded-md flex items-center gap-1 border border-slate-700/60">
+              <Video className="w-3 h-3 text-teal-400" />
+              <span>Demo Video</span>
+            </div>
+          )}
 
           {/* Stage tag */}
-          <div className="absolute bottom-3 left-3 z-10">
-            <span
-              className={`px-2.5 py-0.5 rounded-full text-[10px] font-medium border backdrop-blur-md ${
-                stageBadgeColors[project.stage] || 'bg-slate-800 text-slate-300 border-slate-700'
-              }`}
-            >
-              {project.stage}
-            </span>
-          </div>
-
-          {/* Community Rating Pill */}
-          <div className="absolute bottom-3 right-3 z-10 flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-slate-800 text-[11px] font-mono text-amber-400 font-bold">
-            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-            <span>{project.rating.toFixed(1)}</span>
-            <span className="text-slate-500 font-normal text-[10px]">({project.reviews.length})</span>
+          <div className="absolute bottom-3 left-3 bg-slate-900/90 backdrop-blur-xs text-white text-[11px] font-medium px-2 py-0.5 rounded-md border border-slate-700/60">
+            {project.stage}
           </div>
         </div>
 
         {/* Card Body */}
-        <div className="p-5 space-y-4">
+        <div className="p-5 space-y-3">
           
-          {/* Title & Tagline */}
-          <div className="space-y-1.5">
-            <h3
-              onClick={() => onSelect(project)}
-              className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors cursor-pointer line-clamp-1 flex items-center gap-1.5"
-            >
-              <span>{project.title}</span>
-              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 text-emerald-400 transition-opacity shrink-0" />
-            </h3>
-            <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed font-sans">
-              {project.tagline}
-            </p>
+          {/* Metadata with Indian Rupees */}
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
+            <span className="text-teal-700 font-semibold uppercase tracking-wider text-[11px]">
+              {categoryLabels[project.category] || project.category}
+            </span>
+            <span aria-hidden="true" className="text-slate-300">·</span>
+            <span className="font-mono tabular-nums text-slate-800 font-bold">
+              ₹{project.estimatedCost.toLocaleString('en-IN')} Build Cost
+            </span>
+            <span aria-hidden="true" className="text-slate-300">·</span>
+            <div className="flex items-center gap-0.5 text-amber-600 font-mono tabular-nums font-medium">
+              <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
+              <span>{project.rating.toFixed(1)}</span>
+              <span className="text-slate-400 text-[11px]">({project.reviews.length})</span>
+            </div>
           </div>
 
-          {/* Hardware & Tech Chips */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.hardware.slice(0, 3).map((hw, idx) => (
-              <span
-                key={idx}
-                className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800 truncate max-w-[150px]"
-              >
-                {hw}
-              </span>
-            ))}
-            {project.hardware.length > 3 && (
-              <span className="px-1.5 py-0.5 rounded-md text-[10px] font-mono bg-slate-900/60 text-slate-500 border border-slate-800">
-                +{project.hardware.length - 3}
-              </span>
+          {/* Project Title */}
+          <h3 
+            onClick={() => onSelect(project)}
+            className="text-base font-bold text-slate-900 group-hover:text-teal-700 transition-colors cursor-pointer line-clamp-1"
+          >
+            {project.title}
+          </h3>
+
+          {/* Tagline */}
+          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+            {project.tagline}
+          </p>
+
+          {/* Simple Technical Summary */}
+          <div className="space-y-2 pt-1 border-t border-slate-100">
+            
+            {/* Languages & Stack */}
+            <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-600">
+              <span className="text-slate-400 font-medium">Tech:</span>
+              {project.languages.slice(0, 3).map((lang) => (
+                <span key={lang} className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-mono text-[10px]">
+                  {lang}
+                </span>
+              ))}
+              {project.technologies.slice(0, 2).map((tech) => (
+                <span key={tech} className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[10px]">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Hardware parts snippet */}
+            {project.hardware.length > 0 && (
+              <div className="flex items-center gap-1.5 text-[11px] text-slate-600 truncate">
+                <span className="text-slate-400 font-medium shrink-0">Parts:</span>
+                <span className="text-slate-700 truncate text-[11px]">
+                  {project.hardware.slice(0, 2).join(', ')}
+                  {project.hardware.length > 2 && ` +${project.hardware.length - 2} more`}
+                </span>
+              </div>
             )}
-          </div>
 
-          {/* Financials & Target Progress in Indian Rupees */}
-          <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <div>
-                <span className="text-[10px] font-mono uppercase text-slate-500 block">Parts BOM Cost</span>
-                <span className="text-sm font-mono font-bold text-emerald-400">
-                  ₹{project.estimatedCost.toLocaleString('en-IN')}
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="text-[10px] font-mono uppercase text-slate-500 block">Target Pre-Seed</span>
-                <span className="text-sm font-mono font-bold text-slate-200">
-                  ₹{project.targetFunding.toLocaleString('en-IN')}
-                </span>
-              </div>
+            {/* Intellectual Property Notice */}
+            <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+              <span className="truncate">
+                {project.ipType} ({project.ipStatus})
+              </span>
+              <span className="text-[10px] text-slate-400 italic shrink-0">
+                · Self-reported
+              </span>
             </div>
 
-            {/* Target Funding Bar */}
-            <div className="space-y-1">
-              <div className="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
-                <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
-                  style={{ width: `${fundingPercent}%` }}
-                />
-              </div>
-              <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                <span>Validation Stage</span>
-                <span className="text-emerald-400 font-semibold">{fundingPercent}% Seed Ready</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Founder Credit & IP Badge */}
-          <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 min-w-0">
-              {project.founderAvatar ? (
-                <img
-                  src={project.founderAvatar}
-                  alt={project.founderName}
-                  className="w-6 h-6 rounded-full object-cover border border-emerald-500/40 shrink-0"
-                />
-              ) : (
-                <div className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold flex items-center justify-center shrink-0">
-                  {project.founderName.charAt(0)}
-                </div>
-              )}
-              <div className="truncate">
-                <div className="text-slate-200 font-medium truncate text-[11px]">{project.founderName}</div>
-                <div className="text-[10px] text-slate-500 truncate">{project.founderInstitution}</div>
-              </div>
-            </div>
-
-            <div className="shrink-0 flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
-              <ShieldCheck className="w-3 h-3 text-emerald-400" />
-              <span>{project.ipStatus}</span>
-            </div>
           </div>
 
         </div>
       </div>
 
-      {/* Card Action Footer */}
-      <div className="p-3 bg-slate-950/70 border-t border-slate-800/70 grid grid-cols-2 gap-2">
+      {/* Card Actions Footer */}
+      <div className="p-4 pt-2 border-t border-slate-100 bg-slate-50/60 flex items-center justify-between gap-2">
         <button
           onClick={() => onSelect(project)}
-          className="w-full py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+          className="text-xs font-semibold text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 transition-colors flex items-center gap-1"
         >
-          <span>Inspect Specs</span>
+          <span>View Details</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </button>
 
         <button
           onClick={() => onContact(project)}
-          className="w-full py-2 px-3 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 hover:text-emerald-200 border border-emerald-500/30 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 group-hover:border-emerald-500/60"
+          className="text-xs font-bold text-slate-950 bg-teal-400 hover:bg-teal-300 px-3 py-1.5 rounded-lg transition-colors shadow-2xs active:scale-95"
         >
-          <Send className="w-3 h-3 text-emerald-400" />
-          <span>{activeRole === 'investor' ? 'Send Check' : 'Contact'}</span>
+          {activeRole === 'investor' ? 'Pitch / Inquire' : 'Express Interest'}
         </button>
       </div>
-
     </div>
   );
 };
