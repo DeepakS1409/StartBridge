@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import LoginPage from './loginpage';
 import { Navbar } from './components/Navbar';
 import { ProjectCard } from './components/ProjectCard';
 import { ProjectDetailModal } from './components/ProjectDetailModal';
@@ -38,6 +39,7 @@ import {
 export default function App() {
   // Global State
   const [activeRole, setActiveRole] = useState<UserRole>('developer');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
   const [investors, setInvestors] = useState<Investor[]>(INITIAL_INVESTORS);
   const [messages, setMessages] = useState<ContactMessage[]>(INITIAL_MESSAGES);
@@ -193,6 +195,20 @@ export default function App() {
   const allCommunityReviews = projects.flatMap((p) =>
     p.reviews.map((r) => ({ ...r, projectTitle: p.title, projectObj: p }))
   );
+    // Show login page before opening the dashboard
+  if (!isAuthenticated) {
+    return (
+      <LoginPage
+        onLogin={(user) => {
+          setActiveRole(
+            user.role === 'investor' ? 'investor' : 'developer'
+          );
+
+          setIsAuthenticated(true);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#070A12] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
