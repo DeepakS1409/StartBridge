@@ -6,12 +6,67 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+:root {
+  color-scheme: dark;
+}
+
 body {
   font-family: var(--font-sans);
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #070a12;
+  color: #f1f5f9;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
+
+/* Custom Scrollbar for Luxury Dark Dashboard */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Glassmorphism utility helpers */
+.glass-panel {
+  background: rgba(13, 19, 33, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(19, 28, 49, 0.82);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 35px -10px rgba(16, 185, 129, 0.15);
+}
+
+.neon-glow-emerald {
+  box-shadow: 0 0 25px -3px rgba(16, 185, 129, 0.35);
+}
+
+.neon-glow-teal {
+  box-shadow: 0 0 25px -3px rgba(20, 184, 166, 0.35);
+}
+
+.neon-border {
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
