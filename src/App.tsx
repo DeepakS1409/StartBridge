@@ -615,6 +615,7 @@ export default function App() {
       <AiAssistantModal
         isOpen={isAiAssistantOpen}
         onClose={() => setIsAiAssistantOpen(false)}
+        onOpen={() => setIsAiAssistantOpen(true)}
         activeRole={activeRole}
         currentCategory={selectedCategory}
       />
