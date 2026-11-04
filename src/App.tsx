@@ -39,6 +39,7 @@ import {
 export default function App() {
   // Global State
   const [activeRole, setActiveRole] = useState<UserRole>('developer');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
   const [investors, setInvestors] = useState<Investor[]>(INITIAL_INVESTORS);
   const [messages, setMessages] = useState<ContactMessage[]>(INITIAL_MESSAGES);
