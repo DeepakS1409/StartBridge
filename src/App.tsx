@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import LoginPage from './loginpage';
 import { Navbar } from './components/Navbar';
 import { ProjectCard } from './components/ProjectCard';
 import { ProjectDetailModal } from './components/ProjectDetailModal';
