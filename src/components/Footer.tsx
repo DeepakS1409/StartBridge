@@ -1,84 +1,51 @@
 import React from 'react';
-import { ShieldAlert, Heart, ExternalLink, Sparkles } from 'lucide-react';
+import { ShieldCheck, Heart, Sparkles, Terminal, Code2 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-800 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <footer className="mt-20 border-t border-slate-800/80 bg-[#070A12] text-slate-400 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          
-          {/* Brand Info */}
-          <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-teal-500 flex items-center justify-center text-slate-950 font-black text-sm">
+        {/* Top Branding & Disclaimer */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="md:col-span-5 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black text-xs">
                 SB
               </div>
-              <span className="text-base font-bold text-white tracking-tight">
-                Start<span className="text-teal-400">Bridge</span>
+              <span className="text-lg font-bold text-white tracking-tight">
+                Start<span className="text-emerald-400">Bridge</span>
+              </span>
+              <span className="text-[10px] font-mono uppercase bg-slate-900 text-emerald-400 border border-slate-800 px-2 py-0.5 rounded-full">
+                Pre-Seed India ₹
               </span>
             </div>
-            <p className="text-slate-400 leading-relaxed text-xs">
-              Connecting college student developers who build real prototypes with startup angel investors in India.
+            <p className="text-xs text-slate-400 leading-relaxed font-sans max-w-sm">
+              Empowering university student innovators to bridge the gap between classroom prototypes and verified early-stage angel checks.
             </p>
           </div>
 
-          {/* Impact Sectors */}
-          <div className="space-y-2">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Startup Sectors
-            </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              <li><span className="hover:text-teal-400 cursor-pointer">Healthcare & Medical Devices</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Education & Learning Aids</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Farming & Soil Sensors</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Clean Water & Environment</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Robotics & Smart Cameras</span></li>
-            </ul>
-          </div>
-
-          {/* Student Innovator Resources in Simple English */}
-          <div className="space-y-2">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Student Resources
-            </h4>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              <li><span className="hover:text-teal-400 cursor-pointer">How to Write a Parts List (BOM)</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Provisional Patent Basics in India</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">College Project Funding Guide</span></li>
-              <li><span className="hover:text-teal-400 cursor-pointer">Tips for Demo Videos</span></li>
-            </ul>
-          </div>
-
-          {/* Compliance & Simulated Notice in Simple English */}
-          <div className="space-y-2">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Notice for Users
-            </h4>
-            <div className="bg-slate-900 border border-slate-800 p-3 rounded-xl text-[11px] text-slate-400 leading-relaxed space-y-1.5">
-              <div className="flex items-center gap-1.5 text-teal-400 font-semibold">
-                <ShieldAlert className="w-3.5 h-3.5" />
-                <span>Simulated Educational Platform</span>
-              </div>
-              <p>
-                StartBridge does not handle actual bank money transfers or verify official government patent papers. All project costs, investments, and reviews on this website are simulated for student learning.
-              </p>
+          <div className="md:col-span-7 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-xs space-y-2">
+            <div className="flex items-center gap-2 text-emerald-400 font-bold">
+              <ShieldCheck className="w-4 h-4 shrink-0" />
+              <span>Simulated Prototype Hub for Student Education</span>
             </div>
+            <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+              StartBridge features simulated financial transactions and self-reported IP status. All patent disclosures and funding commitments are prototypes designed for university training and demo pitch competitions.
+            </p>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
+        <div className="pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
           <div>
-            © {new Date().getFullYear()} StartBridge. Built for college startup developers and angel investors.
+            © 2026 StartBridge Technologies. Built with React 19, Tailwind CSS v4 & Gemini 3.8.
           </div>
           <div className="flex items-center gap-4">
-            <span className="hover:text-white cursor-pointer">Privacy Notice</span>
-            <span>·</span>
-            <span className="hover:text-white cursor-pointer">Terms of Service</span>
-            <span>·</span>
-            <span className="hover:text-white cursor-pointer">Student Club Partnerships</span>
+            <span className="text-emerald-400/80 font-semibold flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Network Live in Indian Rupees (₹)
+            </span>
           </div>
         </div>
 

@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Category, IPStatus, IPType, Project, ProjectStage } from '../types';
-import { X, Plus, AlertCircle, CheckCircle2, ShieldAlert, Cpu } from 'lucide-react';
+import {
+  X,
+  Plus,
+  AlertCircle,
+  CheckCircle2,
+  ShieldAlert,
+  Cpu,
+  Code2,
+  DollarSign,
+  Video,
+  User,
+  Sparkles
+} from 'lucide-react';
 
 interface SubmitProjectModalProps {
   isOpen: boolean;
@@ -62,7 +74,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
       tagline: tagline.trim(),
       category,
       description: description.trim(),
-      benefits: benefits.length > 0 ? benefits : ['Affordable for people to buy and easy to use daily.'],
+      benefits: benefits.length > 0 ? benefits : ['Affordable for everyday adoption and easy to deploy.'],
       languages: languages.length > 0 ? languages : ['Python', 'TypeScript'],
       technologies: technologies.length > 0 ? technologies : ['React', 'FastAPI'],
       hardware: hardware.length > 0 ? hardware : ['Microcontroller Board'],
@@ -82,343 +94,301 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 md:p-6 animate-in fade-in duration-200">
-      <div 
-        className="relative bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6 flex flex-col max-h-[92vh]"
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 md:p-6 animate-in fade-in duration-200">
+      <div
+        className="relative bg-[#0B0F19] w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-800 text-slate-100 overflow-hidden my-6 flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header */}
-        <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
-          <div>
-            <span className="text-xs font-semibold text-teal-400 uppercase tracking-wider">
-              Developer Portal
-            </span>
-            <h2 className="text-lg font-bold text-white">
-              Submit Your Startup Project
-            </h2>
+        {/* Header */}
+        <div className="sticky top-0 z-10 bg-[#0B0F19]/95 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-800">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+              <Plus className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-base sm:text-lg font-bold text-white">Pitch New Startup Prototype</h2>
+              <p className="text-xs text-slate-400">List your hardware specifications and budget in Indian Rupees (₹)</p>
+            </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            aria-label="Close modal"
+            className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Modal Form */}
-        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-6">
+        {/* Form Body */}
+        <form onSubmit={handleSubmit} className="overflow-y-auto p-6 space-y-6">
           
-          {/* Simple English Notice */}
-          <div className="bg-blue-50 border border-blue-200 text-blue-900 p-3 rounded-xl text-xs flex items-start gap-2">
-            <ShieldAlert className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
-            <div>
-              <strong>Quick Guide for Students:</strong> Fill in your project information, parts list, and costs in Indian Rupees (₹). Your project will be displayed on the website right away for investors to see.
-            </div>
-          </div>
-
-          {/* Section 1: Basic Info */}
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              1. Project Name & Description
+          {/* Section 1: Prototype Core */}
+          <div className="space-y-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span>1. Prototype Basics</span>
             </h3>
 
-            <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                Project Title *
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. Smart Solar Soil Water Sensor"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-3">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Sector *
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value as Category)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-                >
-                  <option value="healthcare">Healthcare</option>
-                  <option value="education">Education</option>
-                  <option value="agriculture">Agriculture</option>
-                  <option value="environment">Environment</option>
-                  <option value="technology">Technology</option>
-                </select>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Project Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. CardioMesh — Smart Wearable Heart Monitor"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none"
+                />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Current Stage *
-                </label>
-                <select
-                  value={stage}
-                  onChange={(e) => setStage(e.target.value as ProjectStage)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-                >
-                  <option value="Concept">Idea Concept</option>
-                  <option value="Working Prototype">Working Prototype</option>
-                  <option value="MVP">MVP (Early Product)</option>
-                  <option value="Field Tested">Field Tested with Users</option>
-                </select>
+                <label className="block text-xs font-medium text-slate-300 mb-1">One-Line Tagline *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. A chest band that spots irregular heartbeats early without hospital visits"
+                  value={tagline}
+                  onChange={(e) => setTagline(e.target.value)}
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none"
+                />
               </div>
-            </div>
 
-            <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                One-Sentence Summary *
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. A solar-powered sensor that helps farmers save water by checking soil moisture..."
-                value={tagline}
-                onChange={(e) => setTagline(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              />
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1">Category *</label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value as Category)}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none capitalize"
+                  >
+                    <option value="healthcare">Healthcare & Biotech</option>
+                    <option value="education">Education Tech</option>
+                    <option value="agriculture">AgriTech & Climate</option>
+                    <option value="environment">CleanTech & Water</option>
+                    <option value="technology">DeepTech & Robotics</option>
+                  </select>
+                </div>
 
-            <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                Full Description (in simple words) *
-              </label>
-              <textarea
-                required
-                rows={3}
-                placeholder="Explain what problem your startup solves and how your prototype works..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              />
-            </div>
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1">Prototype Readiness Stage</label>
+                  <select
+                    value={stage}
+                    onChange={(e) => setStage(e.target.value as ProjectStage)}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none"
+                  >
+                    <option value="Concept">Idea Concept</option>
+                    <option value="Working Prototype">Working Prototype</option>
+                    <option value="MVP">MVP (Early Product)</option>
+                    <option value="Field Tested">Field Tested with Users</option>
+                  </select>
+                </div>
+              </div>
 
-            <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                Key Benefits for Users (One per line)
-              </label>
-              <textarea
-                rows={2}
-                placeholder="Saves 40% of irrigation water&#10;Works completely on solar power with no battery changes&#10;Alerts farmers on their mobile phones"
-                value={benefitsText}
-                onChange={(e) => setBenefitsText(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              />
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Description & Purpose *</label>
+                <textarea
+                  required
+                  rows={3}
+                  placeholder="Explain what problem your project solves in plain words..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl p-3 text-xs text-white placeholder:text-slate-500 focus:outline-none"
+                />
+              </div>
             </div>
           </div>
 
           {/* Section 2: Technical Specifications & BOM */}
-          <div className="space-y-4 pt-4 border-t border-slate-200">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              2. Technologies & Hardware Parts
+          <div className="space-y-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-teal-400 font-bold flex items-center gap-1.5">
+              <span>2. Hardware Sensors & Tech Stack</span>
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-3">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Programming Languages (separated by commas) *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Hardware & Sensors (comma separated)</label>
                 <input
                   type="text"
-                  required
-                  placeholder="Python, C++, TypeScript"
-                  value={languagesText}
-                  onChange={(e) => setLanguagesText(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
+                  placeholder="e.g. ESP32 Microcontroller, Heart Rate Sensor, Battery Cell"
+                  value={hardwareText}
+                  onChange={(e) => setHardwareText(e.target.value)}
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none font-mono"
                 />
               </div>
 
-              <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Software & Tools (separated by commas) *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="React, FastAPI, OpenCV"
-                  value={technologiesText}
-                  onChange={(e) => setTechnologiesText(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-                />
-              </div>
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1">Languages (comma separated)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. C++, Python, TypeScript"
+                    value={languagesText}
+                    onChange={(e) => setLanguagesText(e.target.value)}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none font-mono"
+                  />
+                </div>
 
-            <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                Hardware Parts & Sensors (separated by commas) *
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="ESP32 Chip, Soil Probe, Solar Panel, Battery, 3D Printed Case"
-                value={hardwareText}
-                onChange={(e) => setHardwareText(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
-              />
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1">Frameworks & Libraries</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. React, TinyML, FastAPI"
+                    value={technologiesText}
+                    onChange={(e) => setTechnologiesText(e.target.value)}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none font-mono"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Section 3: Financials in Indian Rupees */}
-          <div className="space-y-4 pt-4 border-t border-slate-200">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              3. Budget in Indian Rupees (₹) & Patents
+          {/* Section 3: Financials & IP Status in Indian Rupees */}
+          <div className="space-y-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span>3. Financials in Indian Rupees (₹) & Patent Status</span>
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Estimated Build Cost (₹ Rupees) *
+                <label className="block text-xs font-medium text-slate-300 mb-1">
+                  Estimated Build Cost (₹) *
                 </label>
-                <input
-                  type="number"
-                  required
-                  min={1000}
-                  step={500}
-                  placeholder="30000"
-                  value={estimatedCost}
-                  onChange={(e) => setEstimatedCost(Number(e.target.value))}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-mono">₹</span>
+                  <input
+                    type="number"
+                    min={1000}
+                    step={1000}
+                    required
+                    value={estimatedCost}
+                    onChange={(e) => setEstimatedCost(Number(e.target.value))}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl pl-8 pr-3 py-2.5 text-xs text-white focus:outline-none font-mono font-bold"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Target Startup Funding (₹ Rupees) *
+                <label className="block text-xs font-medium text-slate-300 mb-1">
+                  Target Pre-Seed Funding (₹) *
                 </label>
-                <input
-                  type="number"
-                  required
-                  min={25000}
-                  step={10000}
-                  placeholder="350000"
-                  value={targetFunding}
-                  onChange={(e) => setTargetFunding(Number(e.target.value))}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-mono">₹</span>
+                  <input
+                    type="number"
+                    min={10000}
+                    step={25000}
+                    required
+                    value={targetFunding}
+                    onChange={(e) => setTargetFunding(Number(e.target.value))}
+                    className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl pl-8 pr-3 py-2.5 text-xs text-white focus:outline-none font-mono font-bold"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Patent or Copyright Type *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Intellectual Property Type</label>
                 <select
                   value={ipType}
                   onChange={(e) => setIpType(e.target.value as IPType)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none"
                 >
                   <option value="Provisional Patent">Provisional Patent</option>
-                  <option value="Utility Patent">Full Utility Patent</option>
-                  <option value="Copyright">Software Copyright</option>
+                  <option value="Utility Patent">Utility Patent</option>
+                  <option value="Copyright">Copyright</option>
+                  <option value="Open Source">Open Source</option>
                   <option value="Trade Secret">Trade Secret</option>
-                  <option value="Open Source">Open Source (Public Free License)</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Patent Filing Status *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">IP Filing Status</label>
                 <select
                   value={ipStatus}
                   onChange={(e) => setIpStatus(e.target.value as IPStatus)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none"
                 >
-                  <option value="Filed">Filed with Patent Office</option>
-                  <option value="Drafting">Currently Preparing Papers</option>
-                  <option value="Granted">Granted & Approved</option>
-                  <option value="Not Filed">Not Filed Yet</option>
+                  <option value="Filed">Filed</option>
+                  <option value="Drafting">Drafting</option>
+                  <option value="Granted">Granted</option>
+                  <option value="Not Filed">Not Filed</option>
                 </select>
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                Working-Model Video Embed Link (YouTube or Vimeo)
-              </label>
+              <label className="block text-xs font-medium text-slate-300 mb-1">Demo Video Link (YouTube Embed)</label>
               <input
-                type="url"
-                placeholder="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+                type="text"
+                placeholder="https://www.youtube-nocookie.com/embed/..."
                 value={videoUrl}
                 onChange={(e) => setVideoUrl(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                className="w-full bg-[#070A12] border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none font-mono"
               />
             </div>
           </div>
 
-          {/* Section 4: Developer Credentials */}
-          <div className="space-y-4 pt-4 border-t border-slate-200">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              4. Founder & College Information
+          {/* Section 4: Founder Profile */}
+          <div className="space-y-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-teal-400 font-bold flex items-center gap-1.5">
+              <span>4. Founder Information</span>
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Your Full Name *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Founder / Team Lead Name</label>
                 <input
                   type="text"
-                  required
-                  placeholder="e.g. Rahul Sharma"
+                  placeholder="e.g. Aria Chen"
                   value={founderName}
                   onChange={(e) => setFounderName(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  Your Role *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">Founder Role</label>
                 <input
                   type="text"
-                  required
-                  placeholder="e.g. 2nd Year Computer Science"
+                  placeholder="e.g. Biomedical Student"
                   value={founderRole}
                   onChange={(e) => setFounderRole(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
-                  College or Institution *
-                </label>
+                <label className="block text-xs font-medium text-slate-300 mb-1">College / Lab Name</label>
                 <input
                   type="text"
-                  required
-                  placeholder="e.g. SECE Innovation Center"
+                  placeholder="e.g. Collegiate BioDesign Lab"
                   value={founderInstitution}
                   onChange={(e) => setFounderInstitution(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                  className="w-full bg-[#070A12] border border-slate-800 focus:border-teal-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none"
                 />
               </div>
             </div>
           </div>
 
-          {/* Footer Submit Buttons */}
-          <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2.5 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-xs rounded-lg transition-all shadow-sm active:scale-95"
-            >
-              Publish Project to StartBridge
-            </button>
+          {/* Disclaimer & Action Bar */}
+          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between text-xs">
+            <span className="text-slate-400 text-[11px]">
+              Ready to showcase to verified angel check-writers across India.
+            </span>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20 hover:scale-105 transition-all"
+              >
+                Publish Prototype
+              </button>
+            </div>
           </div>
 
         </form>
